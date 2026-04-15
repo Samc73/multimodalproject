@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Enhancement Divide | Cognitive Enhancement Ethics</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Work+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #1a1a2e;
+            --secondary: #16213e;
+            --accent: #e94560;
+            --accent-soft: #ff6b88;
+            --bg: #f8f9fa;
+            --text: #2d2d2d;
+            --text-light: #6c757d;
+            --border: #e0e0e0;
+            --card-bg: #ffffff;
+        }
+
+        body {
+            font-family: 'Work Sans', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 120px 20px 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(233, 69, 96, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 107, 136, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 900;
+            margin-bottom: 20px;
+            line-height: 1.1;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.1rem, 3vw, 1.5rem);
+            font-weight: 300;
+            margin-bottom: 40px;
+            opacity: 0.9;
+            animation: fadeInUp 0.8s ease-out 0.2s backwards;
+        }
+
+        .scroll-indicator {
+            margin-top: 60px;
+            animation: fadeInUp 0.8s ease-out 0.4s backwards;
+        }
+
+        .scroll-indicator p {
+            font-size: 0.9rem;
+            opacity: 0.7;
+            margin-bottom: 10px;
+        }
+
+        .scroll-arrow {
+            width: 30px;
+            height: 30px;
+            border-left: 2px solid white;
+            border-bottom: 2px solid white;
+            transform: rotate(-45deg);
+            margin: 0 auto;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: rotate(-45deg) translateY(0);
+            }
+            40% {
+                transform: rotate(-45deg) translateY(-10px);
+            }
+            60% {
+                transform: rotate(-45deg) translateY(-5px);
+            }
+        }
+
+        /* Stats Section */
+        .stats-section {
+            padding: 80px 20px;
+            background: white;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 5vw, 3rem);
+            margin-bottom: 20px;
+            color: var(--primary);
+            text-align: center;
+        }
+
+        .section-intro {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 60px;
+            color: var(--text-light);
+            font-size: 1.1rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .stat-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            padding: 40px 30px;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--accent);
+            transform: scaleY(0);
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .stat-card:hover::before {
+            transform: scaleY(1);
+        }
+
+        .stat-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: var(--accent);
+            margin-bottom: 10px;
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-size: 0.95rem;
+            color: var(--text-light);
+            line-height: 1.4;
+        }
+
+        /* Chart */
+        .chart-container {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 40px;
+            margin-top: 40px;
+        }
+
+        .chart-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            color: var(--primary);
+        }
+
+        .bar-chart {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .bar-row {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .bar-label {
+            flex: 0 0 180px;
+            font-size: 0.9rem;
+            color: var(--text);
+            font-weight: 600;
+        }
+
+        .bar-container {
+            flex: 1;
+            height: 40px;
+            background: #f0f0f0;
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent) 0%, var(--accent-soft) 100%);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 15px;
+            transition: width 1.5s ease-out;
+            width: 0;
+        }
+
+        .bar-fill.animated {
+            animation: fillBar 1.5s ease-out forwards;
+        }
+
+        .bar-percentage {
+            color: white;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        /* Voices Section */
+        .voices-section {
+            padding: 80px 20px;
+            background: var(--bg);
+        }
+
+        .voices-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .voice-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 40px;
+            border: 1px solid var(--border);
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .voice-card:hover {
+            box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+            transform: translateY(-3px);
+        }
+
+        .quote-mark {
+            font-family: 'Playfair Display', serif;
+            font-size: 5rem;
+            color: var(--accent);
+            opacity: 0.2;
+            position: absolute;
+            top: 10px;
+            left: 20px;
+            line-height: 1;
+        }
+
+        .voice-quote {
+            font-size: 1.05rem;
+            line-height: 1.7;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+            font-style: italic;
+        }
+
+        .voice-attribution {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            font-weight: 600;
+        }
+
+        /* Interactive Section */
+        .interactive-section {
+            padding: 80px 20px;
+            background: white;
+        }
+
+        .scenario-box {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-left: 5px solid var(--accent);
+            padding: 40px;
+            border-radius: 12px;
+            margin: 40px 0;
+        }
+
+        .scenario-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .scenario-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 30px;
+        }
+
+        .choices {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .choice-btn {
+            background: white;
+            border: 2px solid var(--border);
+            padding: 20px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            text-align: left;
+            font-family: 'Work Sans', sans-serif;
+            color: var(--text);
+        }
+
+        .choice-btn:hover {
+            border-color: var(--accent);
+            background: var(--accent);
+            color: white;
+            transform: translateX(5px);
+        }
+
+        .reflection {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            padding: 30px;
+            border-radius: 8px;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .reflection.active {
+            display: block;
+            animation: fadeInUp 0.5s ease-out;
+        }
+
+        .reflection-title {
+            font-weight: 600;
+            color: var(--accent);
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        /* Equity Section */
+        .equity-section {
+            padding: 80px 20px;
+            background: var(--primary);
+            color: white;
+        }
+
+        .equity-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
+        }
+
+        .equity-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 35px;
+            transition: all 0.3s ease;
+        }
+
+        .equity-card:hover {
+            background: rgba(255, 255, 255, 0.08);
+            transform: translateY(-5px);
+        }
+
+        .equity-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+
+        .equity-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        .equity-card p {
+            opacity: 0.9;
+            line-height: 1.7;
+        }
+
+        /* Resources Section */
+        .resources-section {
+            padding: 80px 20px;
+            background: var(--bg);
+        }
+
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .resource-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 35px;
+            transition: all 0.3s ease;
+        }
+
+        .resource-card:hover {
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .resource-card h3 {
+            font-family: 'Playfair Display', serif;
+            color: var(--accent);
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+        }
+
+        .resource-card p {
+            color: var(--text-light);
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .resource-link {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            transition: gap 0.3s ease;
+        }
+
+        .resource-link:hover {
+            gap: 10px;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        footer p {
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero {
+                padding: 80px 20px 60px;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .bar-label {
+                flex: 0 0 140px;
+                font-size: 0.85rem;
+            }
+
+            .scenario-box {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>The Enhancement Divide</h1>
+            <p class="hero-subtitle">Exploring the hidden inequalities in cognitive enhancement on college campuses</p>
+            <div class="scroll-indicator">
+                <p>Scroll to explore</p>
+                <div class="scroll-arrow"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="container">
+            <h2 class="section-title">The Numbers Tell a Story</h2>
+            <p class="section-intro">
+                Cognitive enhancement isn't a level playing field. Usage patterns reveal deep inequalities 
+                in who has access, who faces pressure, and who bears the risks.
+            </p>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">5-9%</div>
+                    <p class="stat-label">of college students report using prescription stimulants without a prescription</p>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">$5-20</div>
+                    <p class="stat-label">cost per pill on college campuses—creating economic barriers for students</p>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">11%</div>
+                    <p class="stat-label">of medical students use cognitive enhancers, with rates varying 5-47% across schools</p>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">65%</div>
+                    <p class="stat-label">of college users cite increasing concentration as their primary motivation</p>
+                </div>
+            </div>
+
+            <div class="chart-container">
+                <h3 class="chart-title">How Access Varies: The Hidden Inequalities</h3>
+                <div class="bar-chart">
+                    <div class="bar-row">
+                        <div class="bar-label">Highly competitive universities</div>
+                        <div class="bar-container">
+                            <div class="bar-fill" data-width="25%">
+                                <span class="bar-percentage">Higher rates</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bar-row">
+                        <div class="bar-label">Students with prescriptions who share/sell</div>
+                        <div class="bar-container">
+                            <div class="bar-fill" data-width="26%">
+                                <span class="bar-percentage">26%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bar-row">
+                        <div class="bar-label">Medical students (various schools)</div>
+                        <div class="bar-container">
+                            <div class="bar-fill" data-width="47%">
+                                <span class="bar-percentage">5-47%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bar-row">
+                        <div class="bar-label">General college population</div>
+                        <div class="bar-container">
+                            <div class="bar-fill" data-width="8%">
+                                <span class="bar-percentage">5-9%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <p style="margin-top: 25px; font-size: 0.9rem; color: var(--text-light); line-height: 1.6;">
+                    <strong>What the research shows:</strong> Studies find that cognitive enhancement use is more prevalent in highly competitive academic environments. Access to these drugs is mediated by socioeconomic factors—those with higher earnings and better healthcare access are more likely to obtain enhancers, creating a self-sustaining cycle of advantage.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Voices Section -->
+    <section class="voices-section">
+        <div class="container">
+            <h2 class="section-title">Different Students, Different Realities</h2>
+            <p class="section-intro">
+                Behind the statistics are real students navigating impossible choices. 
+                These voices reveal how the same drugs create vastly different ethical dilemmas.
+            </p>
+
+            <div class="voices-grid">
+                <div class="voice-card">
+                    <div class="quote-mark">"</div>
+                    <p class="voice-quote">
+                        I have ADHD and my medication has been on backorder for weeks. I've called every pharmacy in my city—they're all out. Meanwhile, I know people are using these drugs to study. The shortage means I can't function while others are using my medication recreationally.
+                    </p>
+                    <p class="voice-attribution">— Composite based on shortage experiences</p>
+                </div>
+
+                <div class="voice-card">
+                    <div class="quote-mark">"</div>
+                    <p class="voice-quote">
+                        Pills go for $5 to $10 each on campus, sometimes $20 during finals. That adds up fast when you're on financial aid. My roommate can afford to buy focus, but I can't. We're competing for the same grades, but the playing field isn't level.
+                    </p>
+                    <p class="voice-attribution">— Composite based on campus pricing research</p>
+                </div>
+
+                <div class="voice-card">
+                    <div class="quote-mark">"</div>
+                    <p class="voice-quote">
+                        I get my pills from a friend who has a prescription. No doctor, no monitoring. I have no idea if the dose is safe or if they're even real—70% of pills on the black market contain fentanyl now. But I can't afford a psychiatrist.
+                    </p>
+                    <p class="voice-attribution">— Composite based on safety warnings from CDC/DEA</p>
+                </div>
+
+                <div class="voice-card">
+                    <div class="quote-mark">"</div>
+                    <p class="voice-quote">
+                        At my high school, this wasn't even a thing. Here, everyone talks about 'study drugs' like it's normal. The academic pressure is crushing, but I don't have connections to get pills even if I wanted them. Am I falling behind because I don't have access?
+                    </p>
+                    <p class="voice-attribution">— Composite based on competitive environment research</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Scenario -->
+    <section class="interactive-section">
+        <div class="container">
+            <h2 class="section-title">Consider Your Values</h2>
+            <p class="section-intro">
+                There are no easy answers. This scenario invites you to think through the complexities 
+                of cognitive enhancement in context.
+            </p>
+
+            <div class="scenario-box">
+                <h3 class="scenario-title">The Finals Week Dilemma</h3>
+                <p class="scenario-text">
+                    It's the night before your hardest final. You've been studying, but you're exhausted and 
+                    struggling to focus. Your roommate offers you an Adderall pill. You don't have a prescription. 
+                    You know many of your classmates use these drugs during finals. You're worried about your GPA 
+                    and whether you can keep your scholarship. What factors would shape your decision?
+                </p>
+
+                <div class="choices">
+                    <button class="choice-btn" onclick="showReflection('health')">
+                        I'd think about the health risks of taking an unprescribed medication
+                    </button>
+                    <button class="choice-btn" onclick="showReflection('fairness')">
+                        I'd consider whether this gives me an unfair advantage over other students
+                    </button>
+                    <button class="choice-btn" onclick="showReflection('access')">
+                        I'd wonder why some students can afford this option and others can't
+                    </button>
+                    <button class="choice-btn" onclick="showReflection('pressure')">
+                        I'd question why I'm in a position where I feel I need chemical help to succeed
+                    </button>
+                </div>
+
+                <div id="health-reflection" class="reflection">
+                    <p class="reflection-title">You're thinking about health and safety:</p>
+                    <p>
+                        This is crucial. Without a prescription, you don't know if this dose is safe for you, 
+                        if you have underlying heart conditions, or how it might interact with other factors. 
+                        Students buying from peers often have no medical oversight. But here's the equity issue: 
+                        students with money can see psychiatrists and get prescriptions with proper dosing and monitoring. 
+                        Students without access to healthcare take on medical risks that wealthier peers don't face.
+                    </p>
+                </div>
+
+                <div id="fairness-reflection" class="reflection">
+                    <p class="reflection-title">You're thinking about fairness and competition:</p>
+                    <p>
+                        The fairness question cuts both ways. Is it unfair to enhance your performance artificially? 
+                        Or is the real unfairness that some students have access to tutors, test prep, unstressed 
+                        environments, and yes—cognitive enhancers—while others don't? When advantage is already 
+                        distributed unequally, what does "fair competition" mean? Some students need these medications 
+                        to function at baseline. Where's the line between treatment and enhancement?
+                    </p>
+                </div>
+
+                <div id="access-reflection" class="reflection">
+                    <p class="reflection-title">You're thinking about access and inequality:</p>
+                    <p>
+                        You're identifying the core equity issue. If these drugs cost $15-25 per pill on the black market, 
+                        they're a privilege, not a level playing field. Wealthy students can afford them; others can't. 
+                        Wealthy students can also afford doctors who might diagnose ADHD and provide legitimate prescriptions. 
+                        This creates tiered access: some get nothing, some risk black market pills, some get medical supervision. 
+                        The enhancement landscape mirrors broader educational inequality.
+                    </p>
+                </div>
+
+                <div id="pressure-reflection" class="reflection">
+                    <p class="reflection-title">You're questioning the system itself:</p>
+                    <p>
+                        This gets at something deeper. Why do students feel they need chemical assistance to meet 
+                        academic demands? Is the problem individual choices, or institutional cultures that normalize 
+                        unsustainable workloads and competitive pressure? When universities create environments where 
+                        enhancement seems necessary to succeed, they're part of the ethical problem. Different students 
+                        experience this pressure differently based on their resources, support systems, and stakes.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Equity Issues -->
+    <section class="equity-section">
+        <div class="container">
+            <h2 class="section-title" style="color: white;">The Equity Lens</h2>
+            <p class="section-intro" style="color: rgba(255,255,255,0.8);">
+                Cognitive enhancement doesn't happen in a vacuum. It intersects with systems of privilege 
+                and inequality in ways that demand our attention.
+            </p>
+
+            <div class="equity-grid">
+                <div class="equity-card">
+                    <div class="equity-icon">💰</div>
+                    <h3>Economic Access & Pricing</h3>
+                    <p>
+                        Street prices for Adderall range from $5-20 per pill on college campuses, with costs reaching $0.50-$1.00 per milligram. Research shows those with higher earnings have better access to cognitive enhancers, whether through legal prescriptions or illicit routes, creating unfair advantages in academic and professional settings.
+                    </p>
+                </div>
+
+                <div class="equity-card">
+                    <div class="equity-icon">⚕️</div>
+                    <h3>Healthcare Disparities</h3>
+                    <p>
+                        With insurance, monthly Adderall prescriptions cost $40-72; without insurance, $200-400. Students with good insurance can see psychiatrists for proper diagnosis and monitoring. Others turn to unregulated black market sources, risking counterfeit pills—the DEA reports 7 in 10 seized pills contain lethal doses of fentanyl.
+                    </p>
+                </div>
+
+                <div class="equity-card">
+                    <div class="equity-icon">📚</div>
+                    <h3>Competitive Environments</h3>
+                    <p>
+                        Studies document that cognitive enhancer use is more prevalent in highly competitive academic settings. The ongoing ADHD medication shortage (announced October 2022) has created additional pressure, with 97% of pharmacies reporting Adderall shortages, forcing legitimate patients to compete for limited supply.
+                    </p>
+                </div>
+
+                <div class="equity-card">
+                    <div class="equity-icon">⚖️</div>
+                    <h3>Self-Sustaining Inequality</h3>
+                    <p>
+                        Research shows a cyclical effect: those with higher socioeconomic positions have better access to enhancers, which improve academic performance, supporting their privileged standing—a "self-sustaining circle of advantage." Meanwhile, 26% of students with prescriptions report sharing or selling their medication, creating an informal market.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Resources -->
+    <section class="resources-section">
+        <div class="container">
+            <h2 class="section-title">Resources & Support</h2>
+            <p class="section-intro">
+                If you're struggling with academic pressure, substance use concerns, or need support, 
+                these resources can help.
+            </p>
+
+            <div class="resources-grid">
+                <div class="resource-card">
+                    <h3>Campus Counseling</h3>
+                    <p>
+                        Most universities offer free or low-cost mental health services. Talk to a counselor 
+                        about academic stress, time management, and healthy coping strategies.
+                    </p>
+                    <a href="#" class="resource-link">Find your campus resources →</a>
+                </div>
+
+                <div class="resource-card">
+                    <h3>Academic Support</h3>
+                    <p>
+                        Tutoring, writing centers, study groups, and academic advisors can help you succeed 
+                        without turning to cognitive enhancers.
+                    </p>
+                    <a href="#" class="resource-link">Explore study support →</a>
+                </div>
+
+                <div class="resource-card">
+                    <h3>ADHD Evaluation</h3>
+                    <p>
+                        If you genuinely struggle with focus and think you might have ADHD, seek proper evaluation. 
+                        Many campuses offer student health services that can help.
+                    </p>
+                    <a href="#" class="resource-link">Learn about ADHD testing →</a>
+                </div>
+
+                <div class="resource-card">
+                    <h3>Substance Use Help</h3>
+                    <p>
+                        If you're concerned about your use of stimulants or other substances, confidential 
+                        support is available through campus health and national hotlines.
+                    </p>
+                    <a href="#" class="resource-link">Get confidential help →</a>
+                </div>
+            </div>
+
+            <div style="margin-top: 60px; padding: 40px; background: white; border-radius: 12px; border: 1px solid var(--border);">
+                <h3 style="font-family: 'Playfair Display', serif; font-size: 1.5rem; margin-bottom: 20px; color: var(--primary);">Sources & Research</h3>
+                <p style="font-size: 0.9rem; line-height: 1.8; color: var(--text-light); margin-bottom: 15px;">
+                    All data on this site comes from peer-reviewed research and government sources, including:
+                </p>
+                <ul style="font-size: 0.85rem; line-height: 1.8; color: var(--text-light); margin-left: 20px;">
+                    <li>McCabe et al. studies on prescription stimulant prevalence among college students (5-9% usage rates)</li>
+                    <li>Multi-institutional census of medical students showing 11% use, ranging 5-47% across schools</li>
+                    <li>CDC Health Alert Network on disrupted access and counterfeit pill risks (fentanyl in 70% of seized pills)</li>
+                    <li>FDA announcements on ADHD medication shortages (October 2022 - ongoing)</li>
+                    <li>Street pricing data from addiction research centers ($5-20 per pill, $0.50-$1.00 per mg)</li>
+                    <li>Research on socioeconomic mediators of access (Frontiers in Psychology, Journal of Cognitive Enhancement)</li>
+                    <li>Studies showing 26% of students with prescriptions share/sell medication</li>
+                    <li>Reports on 65% of users citing concentration enhancement as primary motivation</li>
+                </ul>
+                <p style="font-size: 0.85rem; line-height: 1.8; color: var(--text-light); margin-top: 15px; font-style: italic;">
+                    Student "voices" are composites based on documented experiences from shortage studies, pricing research, and safety warnings—not actual individuals.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>This project explores cognitive enhancement ethics through an equity lens.</p>
+            <p style="margin-top: 10px; font-size: 0.85rem;">Created for educational purposes | 2024</p>
+        </div>
+    </footer>
+
+    <script>
+        // Animate bars when they come into view
+        const observerOptions = {
+            threshold: 0.5,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const bars = entry.target.querySelectorAll('.bar-fill');
+                    bars.forEach(bar => {
+                        const width = bar.getAttribute('data-width');
+                        bar.style.width = width;
+                    });
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        const chartContainer = document.querySelector('.chart-container');
+        if (chartContainer) {
+            observer.observe(chartContainer);
+        }
+
+        // Interactive scenario
+        function showReflection(type) {
+            // Hide all reflections
+            document.querySelectorAll('.reflection').forEach(r => {
+                r.classList.remove('active');
+            });
+            
+            // Show selected reflection
+            const reflection = document.getElementById(type + '-reflection');
+            if (reflection) {
+                reflection.classList.add('active');
+                
+                // Smooth scroll to reflection
+                setTimeout(() => {
+                    reflection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }, 100);
+            }
+        }
+
+        // Add hover effect to stat cards
+        document.querySelectorAll('.stat-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.setProperty('--hover-scale', '1');
+            });
+        });
+    </script>
+</body>
+</html>
