@@ -40,6 +40,21 @@
             padding: 0 20px;
         }
 
+        sup {
+            font-size: 0.7em;
+            vertical-align: super;
+        }
+
+        sup a {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        sup a:hover {
+            text-decoration: underline;
+        }
+
         /* Hero Section */
         .hero {
             background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
@@ -272,63 +287,10 @@
             font-size: 0.9rem;
         }
 
-        /* Voices Section */
-        .voices-section {
-            padding: 80px 20px;
-            background: var(--bg);
-        }
-
-        .voices-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
-        }
-
-        .voice-card {
-            background: var(--card-bg);
-            border-radius: 12px;
-            padding: 40px;
-            border: 1px solid var(--border);
-            position: relative;
-            transition: all 0.3s ease;
-        }
-
-        .voice-card:hover {
-            box-shadow: 0 15px 40px rgba(0,0,0,0.08);
-            transform: translateY(-3px);
-        }
-
-        .quote-mark {
-            font-family: 'Playfair Display', serif;
-            font-size: 5rem;
-            color: var(--accent);
-            opacity: 0.2;
-            position: absolute;
-            top: 10px;
-            left: 20px;
-            line-height: 1;
-        }
-
-        .voice-quote {
-            font-size: 1.05rem;
-            line-height: 1.7;
-            margin-bottom: 20px;
-            position: relative;
-            z-index: 1;
-            font-style: italic;
-        }
-
-        .voice-attribution {
-            font-size: 0.9rem;
-            color: var(--text-light);
-            font-weight: 600;
-        }
-
         /* Interactive Section */
         .interactive-section {
             padding: 80px 20px;
-            background: white;
+            background: var(--bg);
         }
 
         .scenario-box {
@@ -402,8 +364,7 @@
         /* Equity Section */
         .equity-section {
             padding: 80px 20px;
-            background: var(--primary);
-            color: white;
+            background: white;
         }
 
         .equity-grid {
@@ -414,15 +375,15 @@
         }
 
         .equity-card {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: var(--card-bg);
+            border: 1px solid var(--border);
             border-radius: 12px;
             padding: 35px;
             transition: all 0.3s ease;
         }
 
         .equity-card:hover {
-            background: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             transform: translateY(-5px);
         }
 
@@ -445,8 +406,8 @@
         }
 
         .equity-card p {
-            opacity: 0.9;
             line-height: 1.7;
+            color: var(--text-light);
         }
 
         /* Resources Section */
@@ -499,6 +460,31 @@
 
         .resource-link:hover {
             gap: 10px;
+        }
+
+        /* References Section */
+        .references-section {
+            margin-top: 60px;
+            padding: 40px;
+            background: white;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+        }
+
+        .references-section h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin-bottom: 25px;
+            color: var(--primary);
+        }
+
+        .reference-item {
+            margin-bottom: 15px;
+            padding-left: 30px;
+            text-indent: -30px;
+            font-size: 0.9rem;
+            line-height: 1.7;
+            color: var(--text);
         }
 
         /* Footer */
@@ -560,19 +546,19 @@
             <div class="stats-grid">
                 <div class="stat-card">
                     <div class="stat-number">5-9%</div>
-                    <p class="stat-label">of college students report using prescription stimulants without a prescription</p>
+                    <p class="stat-label">of college students report using prescription stimulants without a prescription<sup><a href="#ref1">1</a></sup></p>
                 </div>
                 <div class="stat-card">
                     <div class="stat-number">$5-20</div>
-                    <p class="stat-label">cost per pill on college campuses—creating economic barriers for students</p>
+                    <p class="stat-label">cost per pill on college campuses—creating economic barriers for students<sup><a href="#ref2">2,3</a></sup></p>
                 </div>
                 <div class="stat-card">
                     <div class="stat-number">11%</div>
-                    <p class="stat-label">of medical students use cognitive enhancers, with rates varying 5-47% across schools</p>
+                    <p class="stat-label">of medical students use cognitive enhancers, with rates varying 5-47% across schools<sup><a href="#ref4">4</a></sup></p>
                 </div>
                 <div class="stat-card">
                     <div class="stat-number">65%</div>
-                    <p class="stat-label">of college users cite increasing concentration as their primary motivation</p>
+                    <p class="stat-label">of college users cite increasing concentration as their primary motivation<sup><a href="#ref5">5</a></sup></p>
                 </div>
             </div>
 
@@ -613,53 +599,8 @@
                     </div>
                 </div>
                 <p style="margin-top: 25px; font-size: 0.9rem; color: var(--text-light); line-height: 1.6;">
-                    <strong>What the research shows:</strong> Studies find that cognitive enhancement use is more prevalent in highly competitive academic environments. Access to these drugs is mediated by socioeconomic factors—those with higher earnings and better healthcare access are more likely to obtain enhancers, creating a self-sustaining cycle of advantage.
+                    <strong>What the research shows:</strong> Studies find that cognitive enhancement use is more prevalent in highly competitive academic environments.<sup><a href="#ref6">6</a></sup> Access to these drugs is mediated by socioeconomic factors—those with higher earnings and better healthcare access are more likely to obtain enhancers, creating a self-sustaining cycle of advantage.<sup><a href="#ref7">7</a></sup>
                 </p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Voices Section -->
-    <section class="voices-section">
-        <div class="container">
-            <h2 class="section-title">Different Students, Different Realities</h2>
-            <p class="section-intro">
-                Behind the statistics are real students navigating impossible choices. 
-                These voices reveal how the same drugs create vastly different ethical dilemmas.
-            </p>
-
-            <div class="voices-grid">
-                <div class="voice-card">
-                    <div class="quote-mark">"</div>
-                    <p class="voice-quote">
-                        I have ADHD and my medication has been on backorder for weeks. I've called every pharmacy in my city—they're all out. Meanwhile, I know people are using these drugs to study. The shortage means I can't function while others are using my medication recreationally.
-                    </p>
-                    <p class="voice-attribution">— Composite based on shortage experiences</p>
-                </div>
-
-                <div class="voice-card">
-                    <div class="quote-mark">"</div>
-                    <p class="voice-quote">
-                        Pills go for $5 to $10 each on campus, sometimes $20 during finals. That adds up fast when you're on financial aid. My roommate can afford to buy focus, but I can't. We're competing for the same grades, but the playing field isn't level.
-                    </p>
-                    <p class="voice-attribution">— Composite based on campus pricing research</p>
-                </div>
-
-                <div class="voice-card">
-                    <div class="quote-mark">"</div>
-                    <p class="voice-quote">
-                        I get my pills from a friend who has a prescription. No doctor, no monitoring. I have no idea if the dose is safe or if they're even real—70% of pills on the black market contain fentanyl now. But I can't afford a psychiatrist.
-                    </p>
-                    <p class="voice-attribution">— Composite based on safety warnings from CDC/DEA</p>
-                </div>
-
-                <div class="voice-card">
-                    <div class="quote-mark">"</div>
-                    <p class="voice-quote">
-                        At my high school, this wasn't even a thing. Here, everyone talks about 'study drugs' like it's normal. The academic pressure is crushing, but I don't have connections to get pills even if I wanted them. Am I falling behind because I don't have access?
-                    </p>
-                    <p class="voice-attribution">— Composite based on competitive environment research</p>
-                </div>
             </div>
         </div>
     </section>
@@ -702,8 +643,8 @@
                     <p>
                         This is crucial. Without a prescription, you don't know if this dose is safe for you, 
                         if you have underlying heart conditions, or how it might interact with other factors. 
-                        Students buying from peers often have no medical oversight. But here's the equity issue: 
-                        students with money can see psychiatrists and get prescriptions with proper dosing and monitoring. 
+                        The CDC warns that 7 out of 10 pills seized from the illegal drug market contain a lethal dose of fentanyl.<sup><a href="#ref8">8</a></sup> 
+                        But here's the equity issue: students with money can see psychiatrists and get prescriptions with proper dosing and monitoring. 
                         Students without access to healthcare take on medical risks that wealthier peers don't face.
                     </p>
                 </div>
@@ -722,8 +663,8 @@
                 <div id="access-reflection" class="reflection">
                     <p class="reflection-title">You're thinking about access and inequality:</p>
                     <p>
-                        You're identifying the core equity issue. If these drugs cost $15-25 per pill on the black market, 
-                        they're a privilege, not a level playing field. Wealthy students can afford them; others can't. 
+                        You're identifying the core equity issue. Pills cost $5-20 each on campus, sometimes more during finals.<sup><a href="#ref2">2,3</a></sup> 
+                        They're a privilege, not a level playing field. Wealthy students can afford them; others can't. 
                         Wealthy students can also afford doctors who might diagnose ADHD and provide legitimate prescriptions. 
                         This creates tiered access: some get nothing, some risk black market pills, some get medical supervision. 
                         The enhancement landscape mirrors broader educational inequality.
@@ -747,8 +688,8 @@
     <!-- Equity Issues -->
     <section class="equity-section">
         <div class="container">
-            <h2 class="section-title" style="color: white;">The Equity Lens</h2>
-            <p class="section-intro" style="color: rgba(255,255,255,0.8);">
+            <h2 class="section-title">The Equity Lens</h2>
+            <p class="section-intro">
                 Cognitive enhancement doesn't happen in a vacuum. It intersects with systems of privilege 
                 and inequality in ways that demand our attention.
             </p>
@@ -758,7 +699,7 @@
                     <div class="equity-icon">💰</div>
                     <h3>Economic Access & Pricing</h3>
                     <p>
-                        Street prices for Adderall range from $5-20 per pill on college campuses, with costs reaching $0.50-$1.00 per milligram. Research shows those with higher earnings have better access to cognitive enhancers, whether through legal prescriptions or illicit routes, creating unfair advantages in academic and professional settings.
+                        Street prices for Adderall range from $5-20 per pill on college campuses, with costs reaching $0.50-$1.00 per milligram.<sup><a href="#ref2">2,3</a></sup> Research shows those with higher earnings have better access to cognitive enhancers, whether through legal prescriptions or illicit routes, creating unfair advantages in academic and professional settings.<sup><a href="#ref7">7</a></sup>
                     </p>
                 </div>
 
@@ -766,7 +707,7 @@
                     <div class="equity-icon">⚕️</div>
                     <h3>Healthcare Disparities</h3>
                     <p>
-                        With insurance, monthly Adderall prescriptions cost $40-72; without insurance, $200-400. Students with good insurance can see psychiatrists for proper diagnosis and monitoring. Others turn to unregulated black market sources, risking counterfeit pills—the DEA reports 7 in 10 seized pills contain lethal doses of fentanyl.
+                        With insurance, monthly Adderall prescriptions cost $40-72; without insurance, $200-400.<sup><a href="#ref9">9</a></sup> Students with good insurance can see psychiatrists for proper diagnosis and monitoring. Others turn to unregulated black market sources, risking counterfeit pills—the DEA reports 7 in 10 seized pills contain lethal doses of fentanyl.<sup><a href="#ref8">8</a></sup>
                     </p>
                 </div>
 
@@ -774,7 +715,7 @@
                     <div class="equity-icon">📚</div>
                     <h3>Competitive Environments</h3>
                     <p>
-                        Studies document that cognitive enhancer use is more prevalent in highly competitive academic settings. The ongoing ADHD medication shortage (announced October 2022) has created additional pressure, with 97% of pharmacies reporting Adderall shortages, forcing legitimate patients to compete for limited supply.
+                        Studies document that cognitive enhancer use is more prevalent in highly competitive academic settings.<sup><a href="#ref6">6</a></sup> The ongoing ADHD medication shortage (announced October 2022) has created additional pressure, with 97% of pharmacies reporting Adderall shortages, forcing legitimate patients to compete for limited supply.<sup><a href="#ref10">10</a></sup>
                     </p>
                 </div>
 
@@ -782,7 +723,7 @@
                     <div class="equity-icon">⚖️</div>
                     <h3>Self-Sustaining Inequality</h3>
                     <p>
-                        Research shows a cyclical effect: those with higher socioeconomic positions have better access to enhancers, which improve academic performance, supporting their privileged standing—a "self-sustaining circle of advantage." Meanwhile, 26% of students with prescriptions report sharing or selling their medication, creating an informal market.
+                        Research shows a cyclical effect: those with higher socioeconomic positions have better access to enhancers, which improve academic performance, supporting their privileged standing—a "self-sustaining circle of advantage."<sup><a href="#ref7">7</a></sup> Meanwhile, 26% of students with prescriptions report sharing or selling their medication, creating an informal market.<sup><a href="#ref5">5</a></sup>
                     </p>
                 </div>
             </div>
@@ -800,12 +741,12 @@
 
             <div class="resources-grid">
                 <div class="resource-card">
-                    <h3>Campus Counseling</h3>
+                    <h3>Mental Health Services</h3>
                     <p>
-                        Most universities offer free or low-cost mental health services. Talk to a counselor 
+                        Johns Hopkins offers free or low-cost mental health services. Talk to a counselor 
                         about academic stress, time management, and healthy coping strategies.
                     </p>
-                    <a href="#" class="resource-link">Find your campus resources →</a>
+                    <a href="https://wellbeing.jhu.edu/MentalHealthServices/" class="resource-link" target="_blank">Find mental health resources →</a>
                 </div>
 
                 <div class="resource-card">
@@ -814,46 +755,60 @@
                         Tutoring, writing centers, study groups, and academic advisors can help you succeed 
                         without turning to cognitive enhancers.
                     </p>
-                    <a href="#" class="resource-link">Explore study support →</a>
+                    <a href="https://academicsupport.jhu.edu/" class="resource-link" target="_blank">Explore academic support →</a>
                 </div>
 
                 <div class="resource-card">
-                    <h3>ADHD Evaluation</h3>
+                    <h3>ADHD Treatment</h3>
                     <p>
                         If you genuinely struggle with focus and think you might have ADHD, seek proper evaluation. 
-                        Many campuses offer student health services that can help.
+                        Johns Hopkins offers comprehensive ADHD assessment and treatment services.
                     </p>
-                    <a href="#" class="resource-link">Learn about ADHD testing →</a>
+                    <a href="https://wellbeing.jhu.edu/MentalHealthServices/adhd-treatment/" class="resource-link" target="_blank">Learn about ADHD treatment →</a>
                 </div>
 
                 <div class="resource-card">
-                    <h3>Substance Use Help</h3>
+                    <h3>Substance Abuse Support</h3>
                     <p>
                         If you're concerned about your use of stimulants or other substances, confidential 
-                        support is available through campus health and national hotlines.
+                        support is available through Hopkins Medicine's Substance Abuse Center.
                     </p>
-                    <a href="#" class="resource-link">Get confidential help →</a>
+                    <a href="https://www.hopkinsmedicine.org/substance-abuse-center" class="resource-link" target="_blank">Get confidential help →</a>
                 </div>
             </div>
 
-            <div style="margin-top: 60px; padding: 40px; background: white; border-radius: 12px; border: 1px solid var(--border);">
-                <h3 style="font-family: 'Playfair Display', serif; font-size: 1.5rem; margin-bottom: 20px; color: var(--primary);">Sources & Research</h3>
-                <p style="font-size: 0.9rem; line-height: 1.8; color: var(--text-light); margin-bottom: 15px;">
-                    All data on this site comes from peer-reviewed research and government sources, including:
-                </p>
-                <ul style="font-size: 0.85rem; line-height: 1.8; color: var(--text-light); margin-left: 20px;">
-                    <li>McCabe et al. studies on prescription stimulant prevalence among college students (5-9% usage rates)</li>
-                    <li>Multi-institutional census of medical students showing 11% use, ranging 5-47% across schools</li>
-                    <li>CDC Health Alert Network on disrupted access and counterfeit pill risks (fentanyl in 70% of seized pills)</li>
-                    <li>FDA announcements on ADHD medication shortages (October 2022 - ongoing)</li>
-                    <li>Street pricing data from addiction research centers ($5-20 per pill, $0.50-$1.00 per mg)</li>
-                    <li>Research on socioeconomic mediators of access (Frontiers in Psychology, Journal of Cognitive Enhancement)</li>
-                    <li>Studies showing 26% of students with prescriptions share/sell medication</li>
-                    <li>Reports on 65% of users citing concentration enhancement as primary motivation</li>
-                </ul>
-                <p style="font-size: 0.85rem; line-height: 1.8; color: var(--text-light); margin-top: 15px; font-style: italic;">
-                    Student "voices" are composites based on documented experiences from shortage studies, pricing research, and safety warnings—not actual individuals.
-                </p>
+            <div class="references-section">
+                <h3>References</h3>
+                <div id="ref1" class="reference-item">
+                    1. McCabe, S. E., Knight, J. R., Teter, C. J., & Wechsler, H. (2005). Non-medical use of prescription stimulants among US college students: Prevalence and correlates from a national survey. <em>Addiction, 100</em>(1), 96-106.
+                </div>
+                <div id="ref2" class="reference-item">
+                    2. Addiction Resource. (2025). How much does Adderall cost on the street? Retrieved from https://www.addictionresource.net/cost-of-drugs/prescription/adderall/
+                </div>
+                <div id="ref3" class="reference-item">
+                    3. Asana Recovery. (2025). Adderall street value: Understanding the risks of misuse. Retrieved from https://asanarecovery.com/adderall-street-value/
+                </div>
+                <div id="ref4" class="reference-item">
+                    4. Emanuel, R. M., Frellsen, S. L., Kashima, K. J., Sanguino, S. M., Sierles, F. S., & Lazarus, C. J. (2013). Cognitive enhancement drug use among future physicians: Findings from a multi-institutional census of medical students. <em>Journal of General Internal Medicine, 28</em>(8), 1028-1034.
+                </div>
+                <div id="ref5" class="reference-item">
+                    5. McCabe, S. E., Teter, C. J., & Boyd, C. J. (2006). Medical use, illicit use and diversion of prescription stimulant medication. <em>Journal of Psychoactive Drugs, 38</em>(1), 43-56.
+                </div>
+                <div id="ref6" class="reference-item">
+                    6. Sahakian, B., & Morein-Zamir, S. (2024). The rising use of cognitive enhancement drugs and predictors of use during COVID-19: Findings from a cross-sectional survey of students and university staff in the UK. <em>Frontiers in Psychology, 15</em>, Article 1356496.
+                </div>
+                <div id="ref7" class="reference-item">
+                    7. Exploring cognitive enhancers: From neurotherapeutics to ethical and regulatory challenges. (2024). <em>PMC</em>, Article 12333774. https://pmc.ncbi.nlm.nih.gov/articles/PMC12333774/
+                </div>
+                <div id="ref8" class="reference-item">
+                    8. Centers for Disease Control and Prevention. (2024). Health Alert Network (HAN) - 00510: Disrupted access to prescription stimulant medications could increase risk of injury and overdose. Retrieved from https://www.cdc.gov/han/2024/han00510.html
+                </div>
+                <div id="ref9" class="reference-item">
+                    9. Recovered.org. (n.d.). How much does Adderall cost? Retrieved from https://recovered.org/stimulants/adderall-amphetamine-dextroamphetamine/cost-of-adderall
+                </div>
+                <div id="ref10" class="reference-item">
+                    10. Psychiatric Times. (2023). The Rx crisis: The impact of ongoing ADHD medication shortages. Retrieved from https://www.psychiatrictimes.com/view/the-rx-crisis-the-impact-of-ongoing-adhd
+                </div>
             </div>
         </div>
     </section>
@@ -910,10 +865,19 @@
             }
         }
 
-        // Add hover effect to stat cards
-        document.querySelectorAll('.stat-card').forEach(card => {
-            card.addEventListener('mouseenter', function() {
-                this.style.setProperty('--hover-scale', '1');
+        // Smooth scroll for citation links
+        document.querySelectorAll('sup a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    targetElement.style.backgroundColor = '#fff3cd';
+                    setTimeout(() => {
+                        targetElement.style.backgroundColor = '';
+                    }, 2000);
+                }
             });
         });
     </script>
