@@ -287,10 +287,59 @@
             font-size: 0.9rem;
         }
 
+        /* Equity Section */
+        .equity-section {
+            padding: 80px 20px;
+            background: var(--bg);
+        }
+
+        .equity-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
+        }
+
+        .equity-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 35px;
+            transition: all 0.3s ease;
+        }
+
+        .equity-card:hover {
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transform: translateY(-5px);
+        }
+
+        .equity-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+
+        .equity-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        .equity-card p {
+            line-height: 1.7;
+            color: var(--text-light);
+        }
+
         /* Interactive Section */
         .interactive-section {
             padding: 80px 20px;
-            background: var(--bg);
+            background: white;
         }
 
         .scenario-box {
@@ -359,55 +408,6 @@
             color: var(--accent);
             margin-bottom: 15px;
             font-size: 1.1rem;
-        }
-
-        /* Equity Section */
-        .equity-section {
-            padding: 80px 20px;
-            background: white;
-        }
-
-        .equity-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 40px;
-            margin-top: 50px;
-        }
-
-        .equity-card {
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 35px;
-            transition: all 0.3s ease;
-        }
-
-        .equity-card:hover {
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            transform: translateY(-5px);
-        }
-
-        .equity-icon {
-            width: 60px;
-            height: 60px;
-            background: var(--accent);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.8rem;
-            margin-bottom: 20px;
-        }
-
-        .equity-card h3 {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.5rem;
-            margin-bottom: 15px;
-        }
-
-        .equity-card p {
-            line-height: 1.7;
-            color: var(--text-light);
         }
 
         /* Resources Section */
@@ -605,7 +605,52 @@
         </div>
     </section>
 
-    <!-- Interactive Scenario -->
+    <!-- Equity Issues (MOVED BEFORE Interactive Scenario) -->
+    <section class="equity-section">
+        <div class="container">
+            <h2 class="section-title">The Equity Lens</h2>
+            <p class="section-intro">
+                Cognitive enhancement doesn't happen in a vacuum. It intersects with systems of privilege 
+                and inequality in ways that demand our attention.
+            </p>
+
+            <div class="equity-grid">
+                <div class="equity-card">
+                    <div class="equity-icon">💰</div>
+                    <h3>Economic Access & Pricing</h3>
+                    <p>
+                        Street prices for Adderall range from $5-20 per pill on college campuses, with costs reaching $0.50-$1.00 per milligram.<sup><a href="#ref2">2,3</a></sup> Research shows those with higher earnings have better access to cognitive enhancers, whether through legal prescriptions or illicit routes, creating unfair advantages in academic and professional settings.<sup><a href="#ref7">7</a></sup>
+                    </p>
+                </div>
+
+                <div class="equity-card">
+                    <div class="equity-icon">⚕️</div>
+                    <h3>Healthcare Disparities</h3>
+                    <p>
+                        With insurance, monthly Adderall prescriptions cost $40-72. Without insurance, $200-400.<sup><a href="#ref9">9</a></sup> Students with good insurance can see psychiatrists for proper diagnosis and monitoring. Others turn to unregulated black market sources, risking counterfeit pills—the DEA reports 7 in 10 seized pills contain lethal doses of fentanyl.<sup><a href="#ref8">8</a></sup>
+                    </p>
+                </div>
+
+                <div class="equity-card">
+                    <div class="equity-icon">📚</div>
+                    <h3>Competitive Environments</h3>
+                    <p>
+                        Studies document that cognitive enhancer use is more prevalent in highly competitive academic settings.<sup><a href="#ref6">6</a></sup> The ongoing ADHD medication shortage (announced October 2022) has created additional pressure, with 97% of pharmacies reporting Adderall shortages, forcing legitimate patients to compete for limited supply.<sup><a href="#ref10">10</a></sup>
+                    </p>
+                </div>
+
+                <div class="equity-card">
+                    <div class="equity-icon">⚖️</div>
+                    <h3>Self-Sustaining Inequality</h3>
+                    <p>
+                        Research shows a cyclical effect: those with higher socioeconomic positions have better access to enhancers, which improve academic performance, supporting their privileged standing—a "self-sustaining circle of advantage."<sup><a href="#ref7">7</a></sup> Meanwhile, 26% of students with prescriptions report sharing or selling their medication, creating an informal market.<sup><a href="#ref5">5</a></sup>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Scenario (NOW AFTER Equity Section) -->
     <section class="interactive-section">
         <div class="container">
             <h2 class="section-title">Consider Your Values</h2>
@@ -679,51 +724,6 @@
                         unsustainable workloads and competitive pressure? When universities create environments where 
                         enhancement seems necessary to succeed, they're part of the ethical problem. Different students 
                         experience this pressure differently based on their resources, support systems, and stakes.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Equity Issues -->
-    <section class="equity-section">
-        <div class="container">
-            <h2 class="section-title">The Equity Lens</h2>
-            <p class="section-intro">
-                Cognitive enhancement doesn't happen in a vacuum. It intersects with systems of privilege 
-                and inequality in ways that demand our attention.
-            </p>
-
-            <div class="equity-grid">
-                <div class="equity-card">
-                    <div class="equity-icon">💰</div>
-                    <h3>Economic Access & Pricing</h3>
-                    <p>
-                        Street prices for Adderall range from $5-20 per pill on college campuses, with costs reaching $0.50-$1.00 per milligram.<sup><a href="#ref2">2,3</a></sup> Research shows those with higher earnings have better access to cognitive enhancers, whether through legal prescriptions or illicit routes, creating unfair advantages in academic and professional settings.<sup><a href="#ref7">7</a></sup>
-                    </p>
-                </div>
-
-                <div class="equity-card">
-                    <div class="equity-icon">⚕️</div>
-                    <h3>Healthcare Disparities</h3>
-                    <p>
-                        With insurance, monthly Adderall prescriptions cost $40-72. Without insurance, $200-400.<sup><a href="#ref9">9</a></sup> Students with good insurance can see psychiatrists for proper diagnosis and monitoring. Others turn to unregulated black market sources, risking counterfeit pills—the DEA reports 7 in 10 seized pills contain lethal doses of fentanyl.<sup><a href="#ref8">8</a></sup>
-                    </p>
-                </div>
-
-                <div class="equity-card">
-                    <div class="equity-icon">📚</div>
-                    <h3>Competitive Environments</h3>
-                    <p>
-                        Studies document that cognitive enhancer use is more prevalent in highly competitive academic settings.<sup><a href="#ref6">6</a></sup> The ongoing ADHD medication shortage (announced October 2022) has created additional pressure, with 97% of pharmacies reporting Adderall shortages, forcing legitimate patients to compete for limited supply.<sup><a href="#ref10">10</a></sup>
-                    </p>
-                </div>
-
-                <div class="equity-card">
-                    <div class="equity-icon">⚖️</div>
-                    <h3>Self-Sustaining Inequality</h3>
-                    <p>
-                        Research shows a cyclical effect: those with higher socioeconomic positions have better access to enhancers, which improve academic performance, supporting their privileged standing—a "self-sustaining circle of advantage."<sup><a href="#ref7">7</a></sup> Meanwhile, 26% of students with prescriptions report sharing or selling their medication, creating an informal market.<sup><a href="#ref5">5</a></sup>
                     </p>
                 </div>
             </div>
