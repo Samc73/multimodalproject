@@ -55,9 +55,18 @@
             text-decoration: underline;
         }
 
-        /* Hero Section */
+        /* ============================================
+           HERO SECTION WITH BACKGROUND IMAGE
+           ============================================ */
         .hero {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            /* Option 1: Gradient only (current) */
+            /* background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%); */
+            
+            /* Option 2: Image with overlay */
+            background: 
+                linear-gradient(135deg, rgba(26, 26, 46, 0.9) 0%, rgba(22, 33, 62, 0.85) 100%),
+                url('https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=1920') center/cover no-repeat;
+            
             color: white;
             padding: 120px 20px 80px;
             position: relative;
@@ -146,7 +155,9 @@
             }
         }
 
-        /* Stats Section */
+        /* ============================================
+           STATS SECTION
+           ============================================ */
         .stats-section {
             padding: 80px 20px;
             background: white;
@@ -277,17 +288,15 @@
             width: 0;
         }
 
-        .bar-fill.animated {
-            animation: fillBar 1.5s ease-out forwards;
-        }
-
         .bar-percentage {
             color: white;
             font-weight: 600;
             font-size: 0.9rem;
         }
 
-        /* Equity Section */
+        /* ============================================
+           EQUITY SECTION WITH SVG ICONS
+           ============================================ */
         .equity-section {
             padding: 80px 20px;
             background: var(--bg);
@@ -313,16 +322,22 @@
             transform: translateY(-5px);
         }
 
+        /* Updated icon styles for SVG icons */
         .equity-icon {
             width: 60px;
             height: 60px;
-            background: var(--accent);
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-soft) 100%);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.8rem;
             margin-bottom: 20px;
+        }
+
+        .equity-icon svg {
+            width: 30px;
+            height: 30px;
+            fill: white;
         }
 
         .equity-card h3 {
@@ -336,7 +351,9 @@
             color: var(--text-light);
         }
 
-        /* Interactive Section */
+        /* ============================================
+           INTERACTIVE SECTION
+           ============================================ */
         .interactive-section {
             padding: 80px 20px;
             background: white;
@@ -410,7 +427,68 @@
             font-size: 1.1rem;
         }
 
-        /* Resources Section */
+        /* ============================================
+           FEATURE IMAGE SECTION (NEW)
+           ============================================ */
+        .feature-image-section {
+            padding: 60px 20px;
+            background: var(--primary);
+        }
+
+        .feature-image-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .feature-image {
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        .feature-image img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .feature-text {
+            color: white;
+        }
+
+        .feature-text h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .feature-text p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            opacity: 0.9;
+            margin-bottom: 15px;
+        }
+
+        @media (max-width: 768px) {
+            .feature-image-container {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .feature-image img {
+                height: 300px;
+            }
+        }
+
+        /* ============================================
+           RESOURCES SECTION WITH IMAGES
+           ============================================ */
         .resources-section {
             padding: 80px 20px;
             background: var(--bg);
@@ -427,12 +505,24 @@
             background: var(--card-bg);
             border: 1px solid var(--border);
             border-radius: 12px;
-            padding: 35px;
+            overflow: hidden;
             transition: all 0.3s ease;
         }
 
         .resource-card:hover {
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transform: translateY(-5px);
+        }
+
+        /* New: Resource card with image */
+        .resource-image {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+        }
+
+        .resource-content {
+            padding: 25px;
         }
 
         .resource-card h3 {
@@ -522,7 +612,7 @@
     </style>
 </head>
 <body>
-    <!-- Hero Section -->
+    <!-- Hero Section with Background Image -->
     <section class="hero">
         <div class="hero-content">
             <h1>The Enhancement Divide</h1>
@@ -605,7 +695,7 @@
         </div>
     </section>
 
-    <!-- Equity Issues (MOVED BEFORE Interactive Scenario) -->
+    <!-- Equity Section with SVG Icons -->
     <section class="equity-section">
         <div class="container">
             <h2 class="section-title">The Equity Lens</h2>
@@ -616,7 +706,12 @@
 
             <div class="equity-grid">
                 <div class="equity-card">
-                    <div class="equity-icon">💰</div>
+                    <div class="equity-icon">
+                        <!-- Money/Dollar SVG Icon -->
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1.41 16.09V20h-2.67v-1.93c-1.71-.36-3.16-1.46-3.27-3.4h1.96c.1 1.05.82 1.87 2.65 1.87 1.96 0 2.4-.98 2.4-1.59 0-.83-.44-1.61-2.67-2.14-2.48-.6-4.18-1.62-4.18-3.67 0-1.72 1.39-2.84 3.11-3.21V4h2.67v1.95c1.86.45 2.79 1.86 2.85 3.39H14.3c-.05-1.11-.64-1.87-2.22-1.87-1.5 0-2.4.68-2.4 1.64 0 .84.65 1.39 2.67 1.91s4.18 1.39 4.18 3.91c-.01 1.83-1.38 2.83-3.12 3.16z"/>
+                        </svg>
+                    </div>
                     <h3>Economic Access & Pricing</h3>
                     <p>
                         Street prices for Adderall range from $5-20 per pill on college campuses, with costs reaching $0.50-$1.00 per milligram.<sup><a href="#ref2">2,3</a></sup> Research shows those with higher earnings have better access to cognitive enhancers, whether through legal prescriptions or illicit routes, creating unfair advantages in academic and professional settings.<sup><a href="#ref7">7</a></sup>
@@ -624,7 +719,12 @@
                 </div>
 
                 <div class="equity-card">
-                    <div class="equity-icon">⚕️</div>
+                    <div class="equity-icon">
+                        <!-- Medical/Healthcare SVG Icon -->
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M19 3H5c-1.1 0-1.99.9-1.99 2L3 19c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-1 11h-4v4h-4v-4H6v-4h4V6h4v4h4v4z"/>
+                        </svg>
+                    </div>
                     <h3>Healthcare Disparities</h3>
                     <p>
                         With insurance, monthly Adderall prescriptions cost $40-72. Without insurance, $200-400.<sup><a href="#ref9">9</a></sup> Students with good insurance can see psychiatrists for proper diagnosis and monitoring. Others turn to unregulated black market sources, risking counterfeit pills—the DEA reports 7 in 10 seized pills contain lethal doses of fentanyl.<sup><a href="#ref8">8</a></sup>
@@ -632,7 +732,12 @@
                 </div>
 
                 <div class="equity-card">
-                    <div class="equity-icon">📚</div>
+                    <div class="equity-icon">
+                        <!-- Education/Book SVG Icon -->
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M12 11.55C9.64 9.35 6.48 8 3 8v11c3.48 0 6.64 1.35 9 3.55 2.36-2.19 5.52-3.55 9-3.55V8c-3.48 0-6.64 1.35-9 3.55zM12 8c1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3 1.34 3 3 3z"/>
+                        </svg>
+                    </div>
                     <h3>Competitive Environments</h3>
                     <p>
                         Studies document that cognitive enhancer use is more prevalent in highly competitive academic settings.<sup><a href="#ref6">6</a></sup> The ongoing ADHD medication shortage (announced October 2022) has created additional pressure, with 97% of pharmacies reporting Adderall shortages, forcing legitimate patients to compete for limited supply.<sup><a href="#ref10">10</a></sup>
@@ -640,7 +745,12 @@
                 </div>
 
                 <div class="equity-card">
-                    <div class="equity-icon">⚖️</div>
+                    <div class="equity-icon">
+                        <!-- Scale/Justice SVG Icon -->
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M12 3c-1.27 0-2.4.8-2.82 2H3v2h1.95L2 14c-.47 2 1 3 3.5 3s4.06-1 3.5-3L6.05 7h3.12c.33.85 1.01 1.5 1.83 1.77V20H6v2h12v-2h-5V8.77c.82-.27 1.5-.92 1.83-1.77h3.12L15 14c-.47 2 1 3 3.5 3s4.06-1 3.5-3l-2.95-7H21V5h-6.18C14.4 3.8 13.27 3 12 3zm0 2c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zM5.5 14.5l1.5-3.5 1.5 3.5h-3zm12 0l1.5-3.5 1.5 3.5h-3z"/>
+                        </svg>
+                    </div>
                     <h3>Self-Sustaining Inequality</h3>
                     <p>
                         Research shows a cyclical effect: those with higher socioeconomic positions have better access to enhancers, which improve academic performance, supporting their privileged standing—a "self-sustaining circle of advantage."<sup><a href="#ref7">7</a></sup> Meanwhile, 26% of students with prescriptions report sharing or selling their medication, creating an informal market.<sup><a href="#ref5">5</a></sup>
@@ -650,7 +760,29 @@
         </div>
     </section>
 
-    <!-- Interactive Scenario (NOW AFTER Equity Section) -->
+    <!-- NEW: Feature Image Section -->
+    <section class="feature-image-section">
+        <div class="feature-image-container">
+            <div class="feature-image">
+                <!-- Replace with your own image -->
+                <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=800" alt="Students studying together in library">
+            </div>
+            <div class="feature-text">
+                <h2>The Pressure to Perform</h2>
+                <p>
+                    In competitive academic environments, students face enormous pressure to succeed. 
+                    For some, cognitive enhancers seem like the only way to keep up.
+                </p>
+                <p>
+                    But access to these substances—whether legal or illicit—isn't equal. 
+                    Wealth, healthcare access, and social connections determine who can enhance 
+                    and who gets left behind.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Scenario -->
     <section class="interactive-section">
         <div class="container">
             <h2 class="section-title">Consider Your Values</h2>
@@ -730,7 +862,7 @@
         </div>
     </section>
 
-    <!-- Resources -->
+    <!-- Resources with Images -->
     <section class="resources-section">
         <div class="container">
             <h2 class="section-title">Resources & Support</h2>
@@ -741,39 +873,52 @@
 
             <div class="resources-grid">
                 <div class="resource-card">
-                    <h3>Mental Health Services</h3>
-                    <p>
-                        Johns Hopkins offers free or low-cost mental health services. Talk to a counselor 
-                        about academic stress, time management, and healthy coping strategies.
-                    </p>
-                    <a href="https://wellbeing.jhu.edu/MentalHealthServices/" class="resource-link" target="_blank">Find mental health resources →</a>
+                    <!-- Add image to resource card -->
+                    <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=600" alt="Mental health counseling" class="resource-image">
+                    <div class="resource-content">
+                        <h3>Mental Health Services</h3>
+                        <p>
+                            Johns Hopkins offers free or low-cost mental health services. Talk to a counselor 
+                            about academic stress, time management, and healthy coping strategies.
+                        </p>
+                        <a href="https://wellbeing.jhu.edu/MentalHealthServices/" class="resource-link" target="_blank">Find mental health resources →</a>
+                    </div>
                 </div>
 
                 <div class="resource-card">
-                    <h3>Academic Support</h3>
-                    <p>
-                        Tutoring, writing centers, study groups, and academic advisors can help you succeed 
-                        without turning to cognitive enhancers.
-                    </p>
-                    <a href="https://academicsupport.jhu.edu/" class="resource-link" target="_blank">Explore academic support →</a>
+                    <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=600" alt="Student studying with tutor" class="resource-image">
+                    <div class="resource-content">
+                        <h3>Academic Support</h3>
+                        <p>
+                            Tutoring, writing centers, study groups, and academic advisors can help you succeed 
+                            without turning to cognitive enhancers.
+                        </p>
+                        <a href="https://academicsupport.jhu.edu/" class="resource-link" target="_blank">Explore academic support →</a>
+                    </div>
                 </div>
 
                 <div class="resource-card">
-                    <h3>ADHD Treatment</h3>
-                    <p>
-                        If you genuinely struggle with focus and think you might have ADHD, seek proper evaluation. 
-                        Johns Hopkins offers comprehensive ADHD assessment and treatment services.
-                    </p>
-                    <a href="https://wellbeing.jhu.edu/MentalHealthServices/adhd-treatment/" class="resource-link" target="_blank">Learn about ADHD treatment →</a>
+                    <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=600" alt="Medical professional consultation" class="resource-image">
+                    <div class="resource-content">
+                        <h3>ADHD Treatment</h3>
+                        <p>
+                            If you genuinely struggle with focus and think you might have ADHD, seek proper evaluation. 
+                            Johns Hopkins offers comprehensive ADHD assessment and treatment services.
+                        </p>
+                        <a href="https://wellbeing.jhu.edu/MentalHealthServices/adhd-treatment/" class="resource-link" target="_blank">Learn about ADHD treatment →</a>
+                    </div>
                 </div>
 
                 <div class="resource-card">
-                    <h3>Substance Abuse Support</h3>
-                    <p>
-                        If you're concerned about your use of stimulants or other substances, confidential 
-                        support is available through Hopkins Medicine's Substance Abuse Center.
-                    </p>
-                    <a href="https://www.hopkinsmedicine.org/substance-abuse-center" class="resource-link" target="_blank">Get confidential help →</a>
+                    <img src="https://images.unsplash.com/photo-1559757175-5700dde675bc?w=600" alt="Support group meeting" class="resource-image">
+                    <div class="resource-content">
+                        <h3>Substance Abuse Support</h3>
+                        <p>
+                            If you're concerned about your use of stimulants or other substances, confidential 
+                            support is available through Hopkins Medicine's Substance Abuse Center.
+                        </p>
+                        <a href="https://www.hopkinsmedicine.org/substance-abuse-center" class="resource-link" target="_blank">Get confidential help →</a>
+                    </div>
                 </div>
             </div>
 
