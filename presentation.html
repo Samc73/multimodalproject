@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Presentation | The Enhancement Divide</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Work+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #1a1a2e;
+            --secondary: #16213e;
+            --accent: #e94560;
+            --accent-soft: #ff6b88;
+            --bg: #0d0d1a;
+            --text: #ffffff;
+            --text-muted: #a0a0b0;
+        }
+
+        body {
+            font-family: 'Work Sans', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            overflow: hidden;
+        }
+
+        /* Presentation Container */
+        .presentation {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+        }
+
+        /* Individual Slides */
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 60px 80px;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+            background: var(--bg);
+        }
+
+        .slide.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .slide-content {
+            max-width: 1100px;
+            width: 100%;
+            text-align: center;
+        }
+
+        /* Slide Backgrounds */
+        .slide-title-bg {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+        }
+
+        .slide-accent-bg {
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-soft) 100%);
+        }
+
+        .slide-dark-bg {
+            background: var(--bg);
+        }
+
+        .slide-image-bg {
+            background: 
+                linear-gradient(135deg, rgba(26, 26, 46, 0.95) 0%, rgba(22, 33, 62, 0.9) 100%),
+                url('https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=1920') center/cover no-repeat;
+        }
+
+        /* Typography */
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3rem, 8vw, 5rem);
+            font-weight: 900;
+            margin-bottom: 20px;
+            line-height: 1.1;
+        }
+
+        h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 700;
+            margin-bottom: 30px;
+            line-height: 1.2;
+        }
+
+        h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--accent);
+        }
+
+        .subtitle {
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            font-weight: 300;
+            opacity: 0.9;
+            margin-bottom: 30px;
+        }
+
+        .slide p {
+            font-size: 1.3rem;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            color: var(--text-muted);
+        }
+
+        .slide-content.left-align {
+            text-align: left;
+        }
+
+        /* Lists */
+        .slide ul {
+            list-style: none;
+            text-align: left;
+            margin: 30px 0;
+        }
+
+        .slide li {
+            font-size: 1.4rem;
+            margin-bottom: 20px;
+            padding-left: 40px;
+            position: relative;
+            color: var(--text-muted);
+        }
+
+        .slide li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 12px;
+            width: 20px;
+            height: 3px;
+            background: var(--accent);
+        }
+
+        .slide li strong {
+            color: var(--text);
+        }
+
+        /* Two Column Layout */
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            text-align: left;
+            align-items: center;
+        }
+
+        .two-column img {
+            width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+        }
+
+        /* Quote Box */
+        .quote-box {
+            background: rgba(233, 69, 96, 0.1);
+            border-left: 4px solid var(--accent);
+            padding: 30px 40px;
+            margin: 30px 0;
+            text-align: left;
+            border-radius: 0 12px 12px 0;
+        }
+
+        .quote-box p {
+            font-size: 1.5rem;
+            font-style: italic;
+            color: var(--text);
+            margin: 0;
+        }
+
+        /* Stats Display */
+        .stats-row {
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            margin: 40px 0;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            font-weight: 900;
+            color: var(--accent);
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: var(--text-muted);
+            margin-top: 10px;
+        }
+
+        /* Highlight Box */
+        .highlight-box {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 40px;
+            margin: 30px 0;
+        }
+
+        /* Project Preview */
+        .project-preview {
+            background: rgba(255,255,255,0.05);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 30px 0;
+        }
+
+        .project-preview img {
+            width: 100%;
+            max-width: 800px;
+            border-radius: 8px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+        }
+
+        .preview-caption {
+            font-size: 1rem;
+            color: var(--text-muted);
+            margin-top: 15px;
+        }
+
+        /* Challenge/Solution Cards */
+        .challenge-card {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin: 30px 0;
+        }
+
+        .card {
+            background: rgba(255,255,255,0.05);
+            border-radius: 12px;
+            padding: 30px;
+            text-align: left;
+        }
+
+        .card.challenge {
+            border-top: 4px solid #ff6b6b;
+        }
+
+        .card.solution {
+            border-top: 4px solid #51cf66;
+        }
+
+        .card h4 {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: var(--text);
+        }
+
+        .card p {
+            font-size: 1.1rem;
+            margin: 0;
+        }
+
+        /* Slide Number */
+        .slide-number {
+            position: absolute;
+            bottom: 30px;
+            right: 40px;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            opacity: 0.5;
+        }
+
+        /* Navigation */
+        .nav-controls {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 15px;
+            z-index: 100;
+        }
+
+        .nav-btn {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: 'Work Sans', sans-serif;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .nav-btn:hover {
+            background: var(--accent);
+            border-color: var(--accent);
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        /* Progress Bar */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 4px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+            z-index: 100;
+        }
+
+        /* Slide Dots */
+        .slide-dots {
+            position: fixed;
+            bottom: 30px;
+            left: 40px;
+            display: flex;
+            gap: 8px;
+            z-index: 100;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.2);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .dot.active {
+            background: var(--accent);
+            transform: scale(1.2);
+        }
+
+        .dot:hover {
+            background: rgba(255,255,255,0.5);
+        }
+
+        /* Speaker Notes Toggle */
+        .notes-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            z-index: 100;
+        }
+
+        .speaker-notes {
+            position: fixed;
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0,0,0,0.9);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 12px;
+            padding: 20px 30px;
+            max-width: 700px;
+            width: 90%;
+            display: none;
+            z-index: 100;
+        }
+
+        .speaker-notes.visible {
+            display: block;
+        }
+
+        .speaker-notes h4 {
+            color: var(--accent);
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .speaker-notes p {
+            font-size: 1rem;
+            color: var(--text-muted);
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        /* Back to Project Link */
+        .back-link {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            z-index: 100;
+            transition: color 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: var(--accent);
+        }
+
+        /* Timer */
+        .timer {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            padding: 8px 20px;
+            border-radius: 6px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            z-index: 100;
+        }
+
+        .timer.warning {
+            color: #ffd43b;
+        }
+
+        .timer.danger {
+            color: #ff6b6b;
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .slide {
+                padding: 40px 30px;
+            }
+
+            .two-column {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .challenge-card {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-row {
+                flex-direction: column;
+                gap: 30px;
+            }
+
+            .slide li {
+                font-size: 1.2rem;
+            }
+
+            .nav-controls {
+                bottom: 20px;
+            }
+
+            .slide-dots {
+                display: none;
+            }
+        }
+
+        /* Keyboard hint */
+        .keyboard-hint {
+            position: fixed;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            opacity: 0.5;
+        }
+
+        .keyboard-hint kbd {
+            background: rgba(255,255,255,0.1);
+            padding: 4px 8px;
+            border-radius: 4px;
+            margin: 0 3px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Progress Bar -->
+    <div class="progress-bar" id="progressBar"></div>
+
+    <!-- Back Link -->
+    <a href="index.html" class="back-link">← Back to Project</a>
+
+    <!-- Timer -->
+    <div class="timer" id="timer">0:00 / 6:00</div>
+
+    <!-- Notes Toggle -->
+    <button class="notes-toggle" onclick="toggleNotes()">📝 Speaker Notes</button>
+
+    <!-- Slide Dots -->
+    <div class="slide-dots" id="slideDots"></div>
+
+    <!-- Presentation Container -->
+    <div class="presentation" id="presentation">
+
+        <!-- SLIDE 1: Title -->
+        <div class="slide slide-title-bg active" data-notes="Welcome everyone. Today I'm presenting my multimodal project on cognitive enhancement ethics, specifically focusing on the inequalities in who has access to study drugs like Adderall on college campuses.">
+            <div class="slide-content">
+                <h1>The Enhancement Divide</h1>
+                <p class="subtitle">A Multimodal Exploration of Cognitive Enhancement Ethics</p>
+                <div style="margin-top: 60px; opacity: 0.7;">
+                    <p style="font-size: 1.1rem; color: white;">[Your Name]</p>
+                    <p style="font-size: 1rem;">Bioethics & Public Engagement</p>
+                </div>
+            </div>
+            <div class="slide-number">1 / 10</div>
+        </div>
+
+        <!-- SLIDE 2: Topic & Ethical Orientation -->
+        <div class="slide slide-dark-bg" data-notes="My project examines cognitive enhancement through an EQUITY lens. While many discussions focus on whether enhancement is 'cheating,' I wanted to highlight who actually has access to these substances and what that means for educational fairness.">
+            <div class="slide-content">
+                <h2>Topic & Ethical Orientation</h2>
+                
+                <div class="quote-box">
+                    <p>"Cognitive enhancement isn't a level playing field. Who has access, who faces pressure, and who bears the risks are all shaped by inequality."</p>
+                </div>
+
+                <ul>
+                    <li><strong>Topic:</strong> Non-medical use of prescription stimulants (Adderall, Ritalin) among college students</li>
+                    <li><strong>Ethical Lens:</strong> Equity and access—examining how socioeconomic status determines who can enhance and who gets left behind</li>
+                    <li><strong>Key Question:</strong> How do existing inequalities shape the landscape of cognitive enhancement?</li>
+                </ul>
+            </div>
+            <div class="slide-number">2 / 10</div>
+        </div>
+
+        <!-- SLIDE 3: Target Audience & Purpose -->
+        <div class="slide slide-dark-bg" data-notes="My target audience is college students themselves—people who face these decisions and pressures directly. I wanted to create something that would prompt reflection rather than lecture them about what's right or wrong.">
+            <div class="slide-content">
+                <h2>Target Audience & Purpose</h2>
+                
+                <div class="two-column">
+                    <div>
+                        <h3>Audience</h3>
+                        <ul>
+                            <li><strong>Primary:</strong> College students at competitive universities</li>
+                            <li><strong>Secondary:</strong> University administrators, health educators</li>
+                            <li><strong>Characteristics:</strong> Digital natives, time-pressed, skeptical of "just say no" messaging</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3>Purpose</h3>
+                        <ul>
+                            <li><strong>Inform:</strong> Present research on usage patterns and disparities</li>
+                            <li><strong>Prompt reflection:</strong> Help students examine their own values and assumptions</li>
+                            <li><strong>Connect to resources:</strong> Provide pathways to support</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-number">3 / 10</div>
+        </div>
+
+        <!-- SLIDE 4: Why This Genre & Platform -->
+        <div class="slide slide-dark-bg" data-notes="I chose an interactive website because it allows users to engage at their own pace and explore based on their interests. The interactive scenario in particular lets students process the ethical dimensions personally rather than passively receiving information.">
+            <div class="slide-content">
+                <h2>Genre & Platform Choice</h2>
+                
+                <div class="stats-row">
+                    <div class="stat-item">
+                        <div class="stat-number">📱</div>
+                        <div class="stat-label">Interactive Website</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">🎯</div>
+                        <div class="stat-label">Scrollytelling Format</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">💭</div>
+                        <div class="stat-label">Reflective Scenarios</div>
+                    </div>
+                </div>
+
+                <div class="highlight-box">
+                    <h3>Why a Website?</h3>
+                    <ul>
+                        <li><strong>Accessibility:</strong> Students can access on any device, share easily</li>
+                        <li><strong>Interactivity:</strong> Clickable scenarios invite personal engagement</li>
+                        <li><strong>Self-paced:</strong> Readers control their experience</li>
+                        <li><strong>Visual data:</strong> Charts and statistics communicate scale effectively</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="slide-number">4 / 10</div>
+        </div>
+
+        <!-- SLIDE 5: Research Foundation -->
+        <div class="slide slide-dark-bg" data-notes="My project is grounded in peer-reviewed research. These statistics aren't made up—they come from studies in journals like Addiction and the Journal of General Internal Medicine. I also used CDC data and reporting on the current Adderall shortage.">
+            <div class="slide-content">
+                <h2>Research Foundation</h2>
+                
+                <div class="stats-row">
+                    <div class="stat-item">
+                        <div class="stat-number">5-9%</div>
+                        <div class="stat-label">College students using stimulants<br>without prescription</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">$5-20</div>
+                        <div class="stat-label">Cost per pill on<br>college campuses</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">7 in 10</div>
+                        <div class="stat-label">Seized pills contain<br>lethal fentanyl doses</div>
+                    </div>
+                </div>
+
+                <div class="highlight-box" style="text-align: left;">
+                    <h3>Key Sources</h3>
+                    <p style="font-size: 1.1rem;">
+                        • McCabe et al. (2005, 2006) — Prevalence studies in <em>Addiction</em><br>
+                        • Emanuel et al. (2013) — Medical student usage in <em>JGIM</em><br>
+                        • CDC Health Alert (2024) — Fentanyl contamination risks<br>
+                        • PMC (2024) — Socioeconomic access disparities
+                    </p>
+                </div>
+            </div>
+            <div class="slide-number">5 / 10</div>
+        </div>
+
+        <!-- SLIDE 6: Design Decisions -->
+        <div class="slide slide-dark-bg" data-notes="Every design choice was intentional. The dark color scheme with red accents creates urgency. The interactive scenario lets users process the ethics personally. And I included real resources because I wanted the project to be genuinely helpful, not just educational.">
+            <div class="slide-content">
+                <h2>Key Design Decisions</h2>
+                
+                <div class="two-column">
+                    <div>
+                        <h3>Visual Design</h3>
+                        <ul>
+                            <li><strong>Color palette:</strong> Dark blues with red accents—serious but not preachy</li>
+                            <li><strong>Typography:</strong> Playfair Display for authority, Work Sans for readability</li>
+                            <li><strong>Data visualization:</strong> Animated bar charts to engage readers</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3>Content Structure</h3>
+                        <ul>
+                            <li><strong>Statistics first:</strong> Hook with surprising numbers</li>
+                            <li><strong>Equity lens:</strong> Frame the issue before the scenario</li>
+                            <li><strong>Interactive choice:</strong> Personal reflection, not lecture</li>
+                            <li><strong>Resources last:</strong> Practical support pathways</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-number">6 / 10</div>
+        </div>
+
+        <!-- SLIDE 7: Project Excerpt -->
+        <div class="slide slide-image-bg" data-notes="Let me show you a key part of the project—the interactive scenario. [CLICK THROUGH THE SCENARIO ON YOUR ACTUAL PROJECT] Notice how each choice leads to a different reflection that connects back to equity issues. This isn't about telling students what to think—it's about helping them think more carefully.">
+            <div class="slide-content">
+                <h2>Project Excerpt</h2>
+                <p class="subtitle">The Interactive Scenario</p>
+                
+                <div class="project-preview">
+                    <!-- Replace with actual screenshot of your project -->
+                    <img src="https://images.unsplash.com/photo-1517430816045-df4b7de01234?w=1200&q=80" alt="Screenshot of interactive scenario from project" style="opacity: 0.7;">
+                    <p class="preview-caption">
+                        📍 <strong>Live Demo:</strong> I'll show the actual interactive scenario now...
+                    </p>
+                </div>
+                
+                <p style="font-size: 1.1rem; margin-top: 20px;">
+                    The scenario asks: "What factors would shape your decision?" Each choice reveals<br>
+                    different ethical dimensions while connecting back to equity concerns.
+                </p>
+            </div>
+            <div class="slide-number">7 / 10</div>
+        </div>
+
+        <!-- SLIDE 8: Challenges -->
+        <div class="slide slide-dark-bg" data-notes="The biggest challenge was tone. I didn't want to sound preachy or judgmental—that would alienate my audience immediately. But I also didn't want to normalize drug misuse. Finding that balance required multiple revisions.">
+            <div class="slide-content">
+                <h2>Challenges Encountered</h2>
+                
+                <div class="challenge-card">
+                    <div class="card challenge">
+                        <h4>⚠️ Challenge: Tone & Credibility</h4>
+                        <p>How do you discuss drug use with college students without sounding preachy, judgmental, or like a "Just Say No" campaign they'll immediately dismiss?</p>
+                    </div>
+                    <div class="card solution">
+                        <h4>✓ Solution: Center Student Experience</h4>
+                        <p>Used an interactive scenario that starts with the student's perspective. Let them choose what matters to them, then connect to research. No lectures—just reflections.</p>
+                    </div>
+                </div>
+
+                <div class="challenge-card">
+                    <div class="card challenge">
+                        <h4>⚠️ Challenge: Complexity vs. Accessibility</h4>
+                        <p>The equity issues are nuanced—healthcare access, socioeconomic factors, systemic pressures. How do you communicate this without overwhelming readers?</p>
+                    </div>
+                    <div class="card solution">
+                        <h4>✓ Solution: Visual Hierarchy & Chunking</h4>
+                        <p>Used statistics as entry points, icon-based equity cards for scanning, and progressive disclosure through the interactive elements.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-number">8 / 10</div>
+        </div>
+
+        <!-- SLIDE 9: Reflection -->
+        <div class="slide slide-dark-bg" data-notes="Looking back, I learned that effective public communication isn't about dumbing things down—it's about finding the right entry points. The statistics hook people, the scenario makes it personal, and the equity framing gives them a new way to think about the issue.">
+            <div class="slide-content">
+                <h2>What I Learned</h2>
+                
+                <div class="quote-box">
+                    <p>"The goal isn't to tell people what to think—it's to give them better tools for thinking."</p>
+                </div>
+
+                <ul>
+                    <li><strong>Translation is design:</strong> Every choice about layout, color, and interaction shapes how the message lands</li>
+                    <li><strong>Audience skepticism is valid:</strong> Students have good reasons to distrust "health messaging"—earn their attention</li>
+                    <li><strong>Equity reframes everything:</strong> Shifting from "is this cheating?" to "who has access?" opens new ethical territory</li>
+                    <li><strong>Resources matter:</strong> Don't just inform—provide pathways to support</li>
+                </ul>
+            </div>
+            <div class="slide-number">9 / 10</div>
+        </div>
+
+        <!-- SLIDE 10: Questions -->
+        <div class="slide slide-accent-bg" data-notes="Thank you for your attention. I'm happy to take questions about the project, my design choices, or the research behind it.">
+            <div class="slide-content">
+                <h1>Questions?</h1>
+                <p class="subtitle">Thank you for your attention</p>
+                
+                <div style="margin-top: 60px;">
+                    <p style="font-size: 1.2rem; color: white;">
+                        🔗 View the full project: <strong>[your-url-here]</strong>
+                    </p>
+                </div>
+            </div>
+            <div class="slide-number">10 / 10</div>
+        </div>
+
+    </div>
+
+    <!-- Speaker Notes Panel -->
+    <div class="speaker-notes" id="speakerNotes">
+        <h4>📝 Speaker Notes</h4>
+        <p id="notesContent">Click through slides to see notes...</p>
+    </div>
+
+    <!-- Navigation -->
+    <div class="nav-controls">
+        <button class="nav-btn" id="prevBtn" onclick="prevSlide()">← Previous</button>
+        <button class="nav-btn" id="nextBtn" onclick="nextSlide()">Next →</button>
+    </div>
+
+    <!-- Keyboard Hint -->
+    <div class="keyboard-hint">
+        Use <kbd>←</kbd> <kbd>→</kbd> arrow keys or <kbd>Space</kbd> to navigate
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        let totalSlides = document.querySelectorAll('.slide').length;
+        let notesVisible = false;
+        let timerInterval = null;
+        let elapsedSeconds = 0;
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            createDots();
+            updateSlide();
+            startTimer();
+        });
+
+        // Create navigation dots
+        function createDots() {
+            const dotsContainer = document.getElementById('slideDots');
+            for (let i = 0; i < totalSlides; i++) {
+                const dot = document.createElement('div');
+                dot.className = 'dot' + (i === 0 ? ' active' : '');
+                dot.onclick = () => goToSlide(i);
+                dotsContainer.appendChild(dot);
+            }
+        }
+
+        // Navigate slides
+        function nextSlide() {
+            if (currentSlide < totalSlides - 1) {
+                currentSlide++;
+                updateSlide();
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 0) {
+                currentSlide--;
+                updateSlide();
+            }
+        }
+
+        function goToSlide(index) {
+            currentSlide = index;
+            updateSlide();
+        }
+
+        function updateSlide() {
+            // Update slides
+            document.querySelectorAll('.slide').forEach((slide, index) => {
+                slide.classList.toggle('active', index === currentSlide);
+            });
+
+            // Update dots
+            document.querySelectorAll('.dot').forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentSlide);
+            });
+
+            // Update progress bar
+            const progress = ((currentSlide + 1) / totalSlides) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+
+            // Update navigation buttons
+            document.getElementById('prevBtn').disabled = currentSlide === 0;
+            document.getElementById('nextBtn').disabled = currentSlide === totalSlides - 1;
+
+            // Update speaker notes
+            const activeSlide = document.querySelector('.slide.active');
+            const notes = activeSlide.getAttribute('data-notes');
+            document.getElementById('notesContent').textContent = notes || 'No notes for this slide.';
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                e.preventDefault();
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                e.preventDefault();
+                prevSlide();
+            } else if (e.key === 'n' || e.key === 'N') {
+                toggleNotes();
+            }
+        });
+
+        // Toggle speaker notes
+        function toggleNotes() {
+            notesVisible = !notesVisible;
+            document.getElementById('speakerNotes').classList.toggle('visible', notesVisible);
+        }
+
+        // Timer
+        function startTimer() {
+            timerInterval = setInterval(updateTimer, 1000);
+        }
+
+        function updateTimer() {
+            elapsedSeconds++;
+            const minutes = Math.floor(elapsedSeconds / 60);
+            const seconds = elapsedSeconds % 60;
+            const timerEl = document.getElementById('timer');
+            
+            timerEl.textContent = `${minutes}:${seconds.toString().padStart(2, '0')} / 6:00`;
+            
+            // Warning at 5 minutes
+            if (elapsedSeconds >= 300 && elapsedSeconds < 360) {
+                timerEl.classList.add('warning');
+                timerEl.classList.remove('danger');
+            }
+            // Danger at 6 minutes
+            else if (elapsedSeconds >= 360) {
+                timerEl.classList.remove('warning');
+                timerEl.classList.add('danger');
+            }
+        }
+
+        // Touch/swipe support for mobile
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        document.addEventListener('touchstart', e => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        document.addEventListener('touchend', e => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+
+        function handleSwipe() {
+            const swipeThreshold = 50;
+            if (touchEndX < touchStartX - swipeThreshold) {
+                nextSlide();
+            } else if (touchEndX > touchStartX + swipeThreshold) {
+                prevSlide();
+            }
+        }
+    </script>
+</body>
+</html>
